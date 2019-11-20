@@ -14,9 +14,8 @@ def generate_inputs():
     source vertex
     adjacency graph 
 
-    Then, writes this data to three files names test1,2,3.in in the inputs folder
+    Then, writes this data to three files in the inputs folder
     """
-    file_num = 1
     for size in INPUT_SIZES:
         max_num_TAs = size / 2 #the maximum number of TAs we can have is half the number of vertices
         numTAs = random.randint(1, max_num_TAs)
@@ -32,8 +31,7 @@ def generate_inputs():
         source = random.choice(locations_not_homes)
         adj_matrix = generate_matrix(size)
         input_string = convert_input_data_to_string(size, numTAs, locations, homes, source, adj_matrix)
-        write_to_file("./inputs/test" + str(file_num) + ".in", input_string)
-        file_num += 1
+        write_to_file("./inputs/" + str(size) + ".in", input_string)
 
 def generate_vertex_list(size):
     """
