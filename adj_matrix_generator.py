@@ -1,6 +1,6 @@
 import random 
 edge_weights = list(range(10, 21))
-def generate(n, edge_weights):
+def generate_matrix(n, edge_weights = list(range(10, 21))):
     """
     Generates an adj matrix that represents a fully connected graph
     using only weights in edge_weights.
@@ -17,5 +17,5 @@ def print_mat(mat):
     for row in mat:
         print(str(row))
 
-adj_mat = generate(3, edge_weights)
+adj_mat = generate_matrix(3, edge_weights)
 print_mat(adj_mat)
