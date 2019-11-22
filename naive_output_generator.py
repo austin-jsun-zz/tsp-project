@@ -9,7 +9,7 @@ def generate_naive_outputs(filename):
 def convert_input_to_naive_output_string(starting_location, number_of_houses, list_of_houses):
     naive_output = ""
     naive_output += starting_location + " " + starting_location + "\n"
-    naive_output += str(number_of_houses) + "\n"
+    naive_output += str(1) + "\n"
     naive_output += starting_location + " "
     for h in list_of_houses:
         naive_output += h + " "
