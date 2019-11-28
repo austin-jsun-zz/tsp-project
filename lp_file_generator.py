@@ -89,9 +89,16 @@ def generate_indegree_outdegree_constraints(list_of_locations, number_of_locatio
 This function generates constraints which ensure no subtours are selected,
 rather one single tour is selected. 
 """
-def generate_no_subtours_constraints():
+def generate_no_subtours_constraints(number_of_locations):
+    no_subtour_string = ""
+    n = str(number_of_locations)
+    n_1 = str(number_of_locations - 1)
+    for i in range(1, number_of_locations):
+        for j in range(1, number_of_locations):
+            if (i != j):
+                no_subtour_string += "u" + str(i) + " - " + "u" + str(j) + " " + n + " " + "x" + str(i) + str(j) + " <= " + n_1 + "\n"
 
-    return
+    return no_subtour_string
 
 """
 This function generates valid dropoff constraints, essentially, the sum
@@ -101,9 +108,17 @@ be one. If there is no positive indegree, the vertex is not included in
 our tour, and the corresponding clh must be 0 (we cannot dropoff at a vertex
 not included in our tour).
 """
-def generate_valid_dropoff_constraints():
+def generate_valid_dropoff_constraints(list_of_locations, list_of_houses, number_of_locations, index_map):
+    dropoff_constraint_string = ""
+    for h in list_of_houses:
+        h_index = str(index_map[h])
+        for i in range(0, number_of_locations):
+            i_index = str(i)
+            for j in range(0, number_of_locations):
+                dropoff_constraint_string += "x" + str(j) + i_index + " "
+            dropoff_constraint_string += "- " + "c" + i_index + h_index + " >= 0" + "\n"
 
-    return 
+    return dropoff_constraint_string
 
 """
 This function generates the source constraint which ensures that the source
