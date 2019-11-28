@@ -208,7 +208,7 @@ def generate_binary(list_of_locations, list_of_houses, number_of_locations, adja
     for clh in clh_list:
         clh_string += clh + " "
 
-    binary_string += xij_string + clh_string 
+    binary_string += xij_string + clh_string + "\n"
     return binary_string
 
 """
