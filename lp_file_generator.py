@@ -60,9 +60,8 @@ def generate_objective_function():
 This function generates the constraint string that the sum of all clh 
 variables for each h is equal to 1, that is, the TA is only dropped off once.
 """
-def generate_clh_dropoff_constraints(list_of_locations, list_of_houses, number_of_locations):
+def generate_clh_dropoff_constraints(list_of_locations, list_of_houses, number_of_locations, index_map):
     clh_dropoff_constraints_string = ""
-    index_map = generate_index_map(list_of_locations, number_of_locations)
     for h in list_of_houses:
         h_index = str(index_map[h])
         for i in range(0, number_of_locations):
@@ -110,34 +109,58 @@ def generate_valid_dropoff_constraints():
 This function generates the source constraint which ensures that the source
 location is in our tour.
 """
-def generate_source_constraint():
+def generate_source_constraint(starting_location, number_of_locations, index_map):
+    source_constraint_string = ""
+    source_index = str(index_map[starting_location])
+    for i in range(0, number_of_locations):
+        source_constraint_string += "x" + source_index + str(i) + " "
+    source_constraint_string += "> 0"
 
-    return
+    return source_constraint_string
 
 """
 This function generates the bounds of the program (sets xij for edges from i
 to j not in our graph to 0).
 """
-def generate_bounds():
+def generate_bounds(number_of_locations, adjacency_matrix):
+    bounds_string = ""
+    for i in range(0, number_of_locations):
+        for j in range(0, number_of_locations):
+            if (adjacency_matrix[i][j] == "x"):
+                bounds_string += "x" + str(i) + str(j) + " = 0" + "\n"
 
-    return 
+    return bounds_string
 
 """
 This function specifies which lp variables are restricted to take on the 
 values 0 or 1 - all the xij and all the clh.
 """
-def generate_binary():
+def generate_binary(list_of_locations, list_of_houses, number_of_locations, adjacency_matrix):
+    edge_list = generate_edge_list(number_of_locations, adjacency_matrix)
+    clh_list = generate_clh_list(list_of_locations, list_of_houses, number_of_locations)
+    xij_string = ""
+    clh_string = ""
+    binary_string = ""
+    for edge in edge_list:
+        xij_string += edge + " "
 
-    return 
+    for clh in clh_list:
+        clh_string += clh + " "
+
+    binary_string = xij_string + clh_string 
+    return binary_string
 
 """
 This function specifies which lp variables are restricted to take on 
 integer values - these are the u variables for elimination of subtour 
 constraint.
 """
-def generate_integers():
+def generate_integers(number_of_locations):
+    u_variables = ""
+    for i in range(1, number_of_locations):
+        u_variables += "u" + str(i) + " "
 
-    return 
+    return u_variables
 
 
 
