@@ -7,9 +7,39 @@ This function generates the final lp file that reduces the problem to
 linear programming. This file is used as an input to Gurobi.
 """
 def generate_lp_file(input_file):
+    lp_file_string = ""
     input_data = read_file(input_file)
     number_of_locations, number_of_houses, list_of_locations, list_of_houses, starting_location, adjacency_matrix = data_parser(input_data)
+    index_map = generate_index_map(list_of_locations, number_of_locations)
 
+    lp_file_string += "Minimize" + "\n"
+
+    lp_file_string += "Subject To" + "\n"
+    clh_dropoff_string = generate_clh_dropoff_constraints(list_of_locations, list_of_houses, number_of_locations, index_map)
+    lp_file_string += clh_dropoff_string
+    indegree_outdegree_string = generate_indegree_outdegree_constraints(list_of_locations, number_of_locations)
+    lp_file_string += indegree_outdegree_string
+    no_subtour_string = generate_no_subtours_constraints(number_of_locations)
+    lp_file_string += no_subtour_string
+    dropoff_string = generate_valid_dropoff_constraints(list_of_locations, list_of_houses, number_of_locations, index_map)
+    lp_file_string += dropoff_string
+    source_string = generate_source_constraint(starting_location, number_of_locations, index_map)
+    lp_file_string += source_string
+
+    lp_file_string += "Bounds" + "\n"
+    bounds_string = generate_bounds(number_of_locations, adjacency_matrix)
+    lp_file_string += bounds_string
+
+    lp_file_string += "Binary" + "\n"
+    binary_string = generate_binary(list_of_locations, list_of_houses, number_of_locations, adjacency_matrix)
+    lp_file_string += binary_string
+
+    lp_file_string += "Integers" + "\n"
+    integer_string = generate_integers(number_of_locations)
+    lp_file_string += integer_string
+
+    lp_file_string += "End" 
+    write_to_file("./gurobi_inputs/test.lp", lp_file_string)
 """
 This function generates the list of edge variables xij for edges in the graph.
 This list contains only xij, xji for which there exist an edge between i and j
@@ -19,7 +49,7 @@ def generate_edge_list(number_of_locations, adjacency_matrix):
     for i in range(0, number_of_locations):
         for j in range(0, number_of_locations):
             if (adjacency_matrix[i][j] != "x"):
-                edge_list.append("x" + str(i) + str(j))
+                edge_list.append("x" + str(i) + "_" + str(j))
 
     return edge_list
 
@@ -44,7 +74,7 @@ def generate_clh_list(list_of_locations, list_of_houses, number_of_locations):
 
     for i in range(0, number_of_locations):
         for h in list_of_houses:
-            clh_list.append("c" + str(i) + str(index_map[h]))
+            clh_list.append("c" + str(i) + "_" + str(index_map[h]))
 
     return clh_list
 
@@ -63,10 +93,14 @@ variables for each h is equal to 1, that is, the TA is only dropped off once.
 def generate_clh_dropoff_constraints(list_of_locations, list_of_houses, number_of_locations, index_map):
     clh_dropoff_constraints_string = ""
     for h in list_of_houses:
+        clh_dropoff_constraints_string += "\t"
         h_index = str(index_map[h])
         for i in range(0, number_of_locations):
-            clh_dropoff_constraints_string += "c" + str(i) + str(h_index) + " "
-        clh_dropoff_constraints_string += "= 1" + "\n"
+            if (i != number_of_locations - 1):
+                clh_dropoff_constraints_string += "c" + str(i) + "_" + str(h_index) + " + "
+            else:
+                clh_dropoff_constraints_string += "c" + str(i) + "_" + str(h_index)
+        clh_dropoff_constraints_string += " = 1" + "\n"
     
     return clh_dropoff_constraints_string
 
@@ -79,9 +113,13 @@ def generate_indegree_outdegree_constraints(list_of_locations, number_of_locatio
     indegree_outdegree_constraint_string = ""
     for i in range(0, number_of_locations):
         i_index = str(i)
+        indegree_outdegree_constraint_string += "\t"
         for j in range(0, number_of_locations):
-            indegree_outdegree_constraint_string += "x" + str(j) + i_index + " - " + "x" + i_index + str(j) + " "
-        indegree_outdegree_constraint_string += "= 0" + "\n"
+            if (j != number_of_locations - 1):
+                indegree_outdegree_constraint_string += "x" + str(j) + "_" + i_index + " - " + "x" + i_index + "_" + str(j) + " + "
+            else:
+                indegree_outdegree_constraint_string += "x" + str(j) + "_" + i_index + " - " + "x" + i_index + "_" + str(j)
+        indegree_outdegree_constraint_string += " = 0" + "\n"
     
     return indegree_outdegree_constraint_string
 
@@ -96,7 +134,7 @@ def generate_no_subtours_constraints(number_of_locations):
     for i in range(1, number_of_locations):
         for j in range(1, number_of_locations):
             if (i != j):
-                no_subtour_string += "u" + str(i) + " - " + "u" + str(j) + " " + n + " " + "x" + str(i) + str(j) + " <= " + n_1 + "\n"
+                no_subtour_string += "\t" + "u" + str(i) + " - " + "u" + str(j) + " + " + n + " " + "x" + str(i) + "_" + str(j) + " <= " + n_1 + "\n"
 
     return no_subtour_string
 
@@ -113,10 +151,14 @@ def generate_valid_dropoff_constraints(list_of_locations, list_of_houses, number
     for h in list_of_houses:
         h_index = str(index_map[h])
         for i in range(0, number_of_locations):
+            dropoff_constraint_string += "\t"
             i_index = str(i)
             for j in range(0, number_of_locations):
-                dropoff_constraint_string += "x" + str(j) + i_index + " "
-            dropoff_constraint_string += "- " + "c" + i_index + h_index + " >= 0" + "\n"
+                if (j != number_of_locations - 1):
+                    dropoff_constraint_string += "x" + str(j) + "_" + i_index + " + "
+                else:
+                    dropoff_constraint_string += "x" + str(j) + "_" + i_index
+            dropoff_constraint_string += " - " + "c" + i_index + "_" + h_index + " >= 0" + "\n"
 
     return dropoff_constraint_string
 
@@ -127,9 +169,13 @@ location is in our tour.
 def generate_source_constraint(starting_location, number_of_locations, index_map):
     source_constraint_string = ""
     source_index = str(index_map[starting_location])
+    source_constraint_string += "\t"
     for i in range(0, number_of_locations):
-        source_constraint_string += "x" + source_index + str(i) + " "
-    source_constraint_string += "> 0"
+        if (i != number_of_locations - 1):
+            source_constraint_string += "x" + source_index + "_" + str(i) + " + "
+        else:
+            source_constraint_string += "x" + source_index + "_" + str(i)
+    source_constraint_string += " > 0" + "\n"
 
     return source_constraint_string
 
@@ -142,7 +188,7 @@ def generate_bounds(number_of_locations, adjacency_matrix):
     for i in range(0, number_of_locations):
         for j in range(0, number_of_locations):
             if (adjacency_matrix[i][j] == "x"):
-                bounds_string += "x" + str(i) + str(j) + " = 0" + "\n"
+                bounds_string += "\t" + "x" + str(i) + "_" + str(j) + " = 0" + "\n"
 
     return bounds_string
 
@@ -155,14 +201,14 @@ def generate_binary(list_of_locations, list_of_houses, number_of_locations, adja
     clh_list = generate_clh_list(list_of_locations, list_of_houses, number_of_locations)
     xij_string = ""
     clh_string = ""
-    binary_string = ""
+    binary_string = "\t"
     for edge in edge_list:
         xij_string += edge + " "
 
     for clh in clh_list:
         clh_string += clh + " "
 
-    binary_string = xij_string + clh_string 
+    binary_string += xij_string + clh_string 
     return binary_string
 
 """
@@ -171,11 +217,14 @@ integer values - these are the u variables for elimination of subtour
 constraint.
 """
 def generate_integers(number_of_locations):
-    u_variables = ""
+    u_variables = "\t"
     for i in range(1, number_of_locations):
         u_variables += "u" + str(i) + " "
 
     return u_variables
+
+
+generate_lp_file("./inputs/121_50.in")
 
 
 
