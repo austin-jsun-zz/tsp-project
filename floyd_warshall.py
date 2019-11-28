@@ -24,5 +24,3 @@ def all_pairs_shortest_paths(adjacency_matrix, number_of_locations):
                     shortest_dist_matrix[i][j] = shortest_dist_matrix[i][k] + shortest_dist_matrix[k][j]
     
     return shortest_dist_matrix
-
-    

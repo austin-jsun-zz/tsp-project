@@ -1,5 +1,6 @@
 from utils import * 
 from student_utils import *
+from floyd_warshall import * 
 
 
 """
@@ -13,6 +14,9 @@ def generate_lp_file(input_file):
     index_map = generate_index_map(list_of_locations, number_of_locations)
 
     lp_file_string += "Minimize" + "\n"
+    shortest_dist_matrix = all_pairs_shortest_paths(adjacency_matrix, number_of_locations)
+    objective_string = generate_objective_function(list_of_locations, list_of_houses, adjacency_matrix, shortest_dist_matrix, index_map, number_of_locations)
+    lp_file_string += objective_string
 
     lp_file_string += "Subject To" + "\n"
     clh_dropoff_string = generate_clh_dropoff_constraints(list_of_locations, list_of_houses, number_of_locations, index_map)
@@ -82,9 +86,25 @@ def generate_clh_list(list_of_locations, list_of_houses, number_of_locations):
 This function generates the objective function string that we are attempting
 to minimize using LP. 
 """
-def generate_objective_function():
+def generate_objective_function(list_of_locations, list_of_houses, adjacency_matrix, shortest_dist_matrix, index_map, number_of_locations):
+    objective_function_string = "\t"
+    edge_list = generate_edge_list(number_of_locations, adjacency_matrix)
+    #the edges first
+    for i in range(0, len(edge_list)):
+        e = edge_list[i]
+        if (i != len(edge_list) - 1): 
+            objective_function_string += "0.67 " + e + " + "
+        else:
+            objective_function_string += "0.67 " + e + "\n"
+    #the dropoff points next
+    objective_function_string += "\t"
+    for l in range(number_of_locations):
+        for h in list_of_houses:
+            h_index = index_map[h]
+            objective_function_string += "+ " + str(shortest_dist_matrix[l][h_index]) + " " + "c" + str(l) + "_" + str(h_index) + " "
+    objective_function_string += "\n"
 
-    return
+    return objective_function_string
 
 """
 This function generates the constraint string that the sum of all clh 
