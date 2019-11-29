@@ -1,2 +1,4 @@
-./pycache
-./gurobi_inputs
+./pycache/*
+gurobi_inputs/*
+inputs/*
+zips/gurobi_inputs.zip

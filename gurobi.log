@@ -856,3 +856,414 @@ Solution count 4: 10.72 11.39 20.72 187.7
 
 Optimal solution found (tolerance 1.00e-04)
 Best objective 1.072000000000e+01, best bound 1.072000000000e+01, gap 0.0000%
+
+Gurobi 9.0.0 (mac64, gurobi_cl) logging started Thu Nov 28 21:55:23 2019
+
+Using license file /Users/David/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.0 build v9.0.0rc2 (mac64)
+Copyright (c) 2019, Gurobi Optimization, LLC
+
+
+ERROR 10003: Unable to open file '/gurobi_inputs/121_50.lp' for input
+
+
+Gurobi 9.0.0 (mac64, gurobi_cl) logging started Thu Nov 28 21:55:29 2019
+
+Using license file /Users/David/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.0 build v9.0.0rc2 (mac64)
+Copyright (c) 2019, Gurobi Optimization, LLC
+
+Warning: lp file contains 50 repeated variable(s) in constraints, grouped them, 50 cancellation
+Read LP format model from file ./gurobi_inputs/121_50.lp
+Reading time = 0.03 seconds
+: 3168 rows, 3299 columns, 51006 nonzeros
+Optimize a model with 3168 rows, 3299 columns and 51006 nonzeros
+Model fingerprint: 0x8115c28a
+Variable types: 50 continuous, 3249 integer (3200 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 5e+01]
+  Objective range  [7e-01, 2e+01]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 5e+01]
+Presolve added 49 rows and 0 columns
+Presolve time: 0.06s
+Presolved: 3217 rows, 3299 columns, 14306 nonzeros
+Variable types: 0 continuous, 3299 integer (3200 binary)
+
+Root relaxation: objective 1.005000e+01, 198 iterations, 0.01 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0   10.05000    0   11          -   10.05000      -     -    0s
+H    0     0                     187.7000000   10.05000  94.6%     -    0s
+     0     0   10.05000    0   26  187.70000   10.05000  94.6%     -    0s
+H    0     0                      20.7200000   10.05000  51.5%     -    1s
+H    0     0                      11.3900000   10.05000  11.8%     -    1s
+     0     0   10.05000    0   23   11.39000   10.05000  11.8%     -    1s
+     0     0   10.05000    0    7   11.39000   10.05000  11.8%     -    1s
+     0     0   10.05000    0    8   11.39000   10.05000  11.8%     -    1s
+     0     0   10.05000    0   21   11.39000   10.05000  11.8%     -    2s
+     0     0   10.05000    0   20   11.39000   10.05000  11.8%     -    2s
+H    0     0                      10.7200000   10.05000  6.25%     -    2s
+     0     0   10.05000    0   10   10.72000   10.05000  6.25%     -    2s
+     0     0   10.05000    0   10   10.72000   10.05000  6.25%     -    2s
+     0     0   10.05000    0   11   10.72000   10.05000  6.25%     -    2s
+     0     0   10.05000    0    6   10.72000   10.05000  6.25%     -    2s
+     0     0   10.05000    0   24   10.72000   10.05000  6.25%     -    4s
+     0     0   10.05000    0   19   10.72000   10.05000  6.25%     -    4s
+     0     0   10.05000    0    6   10.72000   10.05000  6.25%     -    4s
+     0     0   10.05000    0    6   10.72000   10.05000  6.25%     -    4s
+     0     0   10.05000    0    7   10.72000   10.05000  6.25%     -    4s
+     0     0   10.05000    0    7   10.72000   10.05000  6.25%     -    4s
+     0     2   10.05000    0    7   10.72000   10.05000  6.25%     -    4s
+    86    29 infeasible   15        10.72000   10.05000  6.25%   6.5    5s
+
+Explored 760 nodes (7316 simplex iterations) in 7.79 seconds
+Thread count was 8 (of 8 available processors)
+
+Solution count 4: 10.72 11.39 20.72 187.7 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.072000000000e+01, best bound 1.072000000000e+01, gap 0.0000%
+
+Gurobi 9.0.0 (mac64, gurobi_cl) logging started Thu Nov 28 22:10:43 2019
+
+Using license file /Users/David/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.0 build v9.0.0rc2 (mac64)
+Copyright (c) 2019, Gurobi Optimization, LLC
+
+
+ERROR 10012: Unknown file type for file './inputs/1_50.in'
+
+
+Gurobi 9.0.0 (mac64, gurobi_cl) logging started Thu Nov 28 22:11:34 2019
+
+Using license file /Users/David/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.0 build v9.0.0rc2 (mac64)
+Copyright (c) 2019, Gurobi Optimization, LLC
+
+Warning: lp file contains 50 repeated variable(s) in constraints, grouped them, 50 cancellation
+Read LP format model from file ./gurobi_inputs/121_50.lp
+Reading time = 0.03 seconds
+: 3168 rows, 3299 columns, 51006 nonzeros
+Optimize a model with 3168 rows, 3299 columns and 51006 nonzeros
+Model fingerprint: 0x8115c28a
+Variable types: 50 continuous, 3249 integer (3200 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 5e+01]
+  Objective range  [7e-01, 2e+01]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 5e+01]
+Presolve added 49 rows and 0 columns
+Presolve time: 0.06s
+Presolved: 3217 rows, 3299 columns, 14306 nonzeros
+Variable types: 0 continuous, 3299 integer (3200 binary)
+
+Root relaxation: objective 1.005000e+01, 198 iterations, 0.01 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0   10.05000    0   11          -   10.05000      -     -    0s
+H    0     0                     187.7000000   10.05000  94.6%     -    1s
+     0     0   10.05000    0   26  187.70000   10.05000  94.6%     -    1s
+H    0     0                      20.7200000   10.05000  51.5%     -    1s
+H    0     0                      11.3900000   10.05000  11.8%     -    1s
+     0     0   10.05000    0   23   11.39000   10.05000  11.8%     -    1s
+     0     0   10.05000    0    7   11.39000   10.05000  11.8%     -    1s
+     0     0   10.05000    0    8   11.39000   10.05000  11.8%     -    2s
+     0     0   10.05000    0   21   11.39000   10.05000  11.8%     -    2s
+     0     0   10.05000    0   20   11.39000   10.05000  11.8%     -    2s
+H    0     0                      10.7200000   10.05000  6.25%     -    2s
+     0     0   10.05000    0   10   10.72000   10.05000  6.25%     -    2s
+     0     0   10.05000    0   10   10.72000   10.05000  6.25%     -    2s
+     0     0   10.05000    0   11   10.72000   10.05000  6.25%     -    2s
+     0     0   10.05000    0    6   10.72000   10.05000  6.25%     -    2s
+     0     0   10.05000    0   24   10.72000   10.05000  6.25%     -    3s
+     0     0   10.05000    0   19   10.72000   10.05000  6.25%     -    4s
+     0     0   10.05000    0    6   10.72000   10.05000  6.25%     -    4s
+     0     0   10.05000    0    6   10.72000   10.05000  6.25%     -    4s
+     0     0   10.05000    0    7   10.72000   10.05000  6.25%     -    4s
+     0     0   10.05000    0    7   10.72000   10.05000  6.25%     -    4s
+     0     2   10.05000    0    7   10.72000   10.05000  6.25%     -    4s
+    56    22   10.05000   14    7   10.72000   10.05000  6.25%   8.3    5s
+
+Explored 760 nodes (7316 simplex iterations) in 8.25 seconds
+Thread count was 8 (of 8 available processors)
+
+Solution count 4: 10.72 11.39 20.72 187.7 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.072000000000e+01, best bound 1.072000000000e+01, gap 0.0000%
+
+Wrote result file 'bash_test.sol'
+
+
+Gurobi 9.0.0 (mac64, gurobi_cl) logging started Thu Nov 28 22:24:30 2019
+
+Using license file /Users/David/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.0 build v9.0.0rc2 (mac64)
+Copyright (c) 2019, Gurobi Optimization, LLC
+
+Warning: lp file contains 100 repeated variable(s) in constraints, grouped them, 100 cancellation
+Read LP format model from file ./gurobi_inputs/100.lp
+Reading time = 0.22 seconds
+: 13540 rows, 13799 columns, 426406 nonzeros
+Optimize a model with 13540 rows, 13799 columns and 426406 nonzeros
+Model fingerprint: 0x2bcad9ec
+Variable types: 100 continuous, 13699 integer (13600 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+02]
+  Objective range  [7e-01, 2e+01]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+02]
+Found heuristic solution: objective 603.2000000
+Presolve added 99 rows and 0 columns
+Presolve time: 0.72s
+Presolved: 13639 rows, 13799 columns, 60206 nonzeros
+Variable types: 0 continuous, 13799 integer (13600 binary)
+
+Root relaxation: objective 2.479000e+01, 828 iterations, 0.08 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0   24.79000    0   14  603.20000   24.79000  95.9%     -    1s
+H    0     0                      37.4700000   24.79000  33.8%     -    4s
+     0     0   24.79000    0   64   37.47000   24.79000  33.8%     -    4s
+     0     0   24.79000    0   68   37.47000   24.79000  33.8%     -    4s
+     0     0   24.79000    0   12   37.47000   24.79000  33.8%     -    5s
+     0     0   24.79000    0   39   37.47000   24.79000  33.8%     -    5s
+     0     0   24.79000    0   30   37.47000   24.79000  33.8%     -    5s
+     0     0   24.79000    0    9   37.47000   24.79000  33.8%     -    6s
+     0     0   24.79000    0   44   37.47000   24.79000  33.8%     -    6s
+H    0     0                      25.4600000   24.79000  2.63%     -    6s
+     0     0   24.79000    0   60   25.46000   24.79000  2.63%     -    6s
+     0     0   24.79000    0   30   25.46000   24.79000  2.63%     -    7s
+     0     0   24.79000    0   20   25.46000   24.79000  2.63%     -    7s
+     0     0   24.79000    0   49   25.46000   24.79000  2.63%     -   12s
+     0     0   24.79000    0   15   25.46000   24.79000  2.63%     -   12s
+     0     0   24.79000    0   27   25.46000   24.79000  2.63%     -   13s
+     0     0   24.79000    0   14   25.46000   24.79000  2.63%     -   18s
+     0     2   24.79000    0   24   25.46000   24.79000  2.63%     -   20s
+    85    53   24.79000   17   31   25.46000   24.79000  2.63%   106   25s
+   177   130   24.79000   31   25   25.46000   24.79000  2.63%  74.3   47s
+   308   125   24.79000   31   24   25.46000   24.79000  2.63%  44.6   92s
+   467   141   24.79000   36   14   25.46000   24.79000  2.63%  30.6  124s
+   511   141   24.79000   39   10   25.46000   24.79000  2.63%  28.2  162s
+   665   139   24.79000   41    9   25.46000   24.79000  2.63%  22.4  189s
+   731   126 infeasible   44        25.46000   24.79000  2.63%  20.6  205s
+   992   148 infeasible   41        25.46000   24.79000  2.63%  16.0  275s
+  1356   161 infeasible   47        25.46000   24.79000  2.63%  12.4  364s
+  1573   159 infeasible   46        25.46000   24.79000  2.63%  11.1  391s
+  1654   143 infeasible   44        25.46000   24.79000  2.63%  10.7  462s
+  1997   139   24.79000   40    8   25.46000   24.79000  2.63%   9.3  568s
+  2248   145   24.79000   46    6   25.46000   24.79000  2.63%   8.6  639s
+  2417   132   24.79000   40    8   25.46000   24.79000  2.63%   8.2  718s
+
+Explored 2749 nodes (43858 simplex iterations) in 718.60 seconds
+Thread count was 8 (of 8 available processors)
+
+Solution count 3: 25.46 37.47 603.2 
+
+Solve interrupted
+Best objective 2.546000000000e+01, best bound 2.479000000000e+01, gap 2.6316%
+
+Wrote result file './sol_files/100.sol'
+
+
+Gurobi 9.0.0 (mac64, gurobi_cl) logging started Thu Nov 28 22:36:29 2019
+
+Using license file /Users/David/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.0 build v9.0.0rc2 (mac64)
+Copyright (c) 2019, Gurobi Optimization, LLC
+
+Warning: lp file contains 200 repeated variable(s) in constraints, grouped them, 200 cancellation
+Read LP format model from file ./gurobi_inputs/101_200.lp
+Reading time = 1.15 seconds
+: 52869 rows, 53399 columns, 2864406 nonzeros
+Optimize a model with 52869 rows, 53399 columns and 2864406 nonzeros
+Model fingerprint: 0xba1ac8cb
+Variable types: 39020 continuous, 14379 integer (14180 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 2e+02]
+  Objective range  [7e-01, 5e+01]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 2e+02]
+Presolve removed 6 rows and 39025 columns
+Presolve time: 1.62s
+Presolved: 52863 rows, 14374 columns, 172798 nonzeros
+Variable types: 0 continuous, 14374 integer (14175 binary)
+
+Deterministic concurrent LP optimizer: primal and dual simplex
+Showing first log only...
+
+Concurrent spin time: 0.00s
+
+Solved with dual simplex
+
+Root relaxation: objective 6.513265e+01, 382 iterations, 0.22 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0   65.13265    0  176          -   65.13265      -     -    3s
+
+Explored 1 nodes (1011 simplex iterations) in 5.57 seconds
+Thread count was 8 (of 8 available processors)
+
+Solution count 0
+
+Solve interrupted
+Best objective -, best bound 6.514000000000e+01, gap -
+
+Unable to retrieve attribute 'X'
+
+
+Gurobi 9.0.0 (mac64, gurobi_cl) logging started Thu Nov 28 22:36:35 2019
+
+Using license file /Users/David/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.0 build v9.0.0rc2 (mac64)
+Copyright (c) 2019, Gurobi Optimization, LLC
+
+Warning: lp file contains 50 repeated variable(s) in constraints, grouped them, 50 cancellation
+Read LP format model from file ./gurobi_inputs/101_50.lp
+Reading time = 0.03 seconds
+: 3219 rows, 3349 columns, 53606 nonzeros
+Optimize a model with 3219 rows, 3349 columns and 53606 nonzeros
+Model fingerprint: 0xba09049e
+Variable types: 2098 continuous, 1251 integer (1202 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 5e+01]
+  Objective range  [7e-01, 2e+01]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 5e+01]
+Presolve removed 1 rows and 2098 columns
+Presolve time: 0.02s
+Presolved: 3218 rows, 1251 columns, 13926 nonzeros
+Variable types: 0 continuous, 1251 integer (1202 binary)
+
+Root relaxation: objective 1.176340e+01, 158 iterations, 0.01 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0   11.76340    0   34          -   11.76340      -     -    0s
+
+Explored 1 nodes (204 simplex iterations) in 0.17 seconds
+Thread count was 8 (of 8 available processors)
+
+Solution count 0
+
+Solve interrupted
+Best objective -, best bound 1.177000000000e+01, gap -
+
+Unable to retrieve attribute 'X'
+
+
+Gurobi 9.0.0 (mac64, gurobi_cl) logging started Thu Nov 28 22:36:35 2019
+
+Using license file /Users/David/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.0 build v9.0.0rc2 (mac64)
+Copyright (c) 2019, Gurobi Optimization, LLC
+
+Warning: lp file contains 100 repeated variable(s) in constraints, grouped them, 100 cancellation
+Read LP format model from file ./gurobi_inputs/102_100.lp
+Reading time = 0.23 seconds
+: 14853 rows, 15099 columns, 559006 nonzeros
+Optimize a model with 14853 rows, 15099 columns and 559006 nonzeros
+Model fingerprint: 0x40f4c133
+Variable types: 1064 continuous, 14035 integer (13936 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+02]
+  Objective range  [7e-01, 1e+05]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+02]
+Presolve added 99 rows and 0 columns
+Presolve removed 0 rows and 964 columns
+Presolve time: 0.93s
+Presolved: 14952 rows, 14135 columns, 61230 nonzeros
+Variable types: 0 continuous, 14135 integer (13936 binary)
+
+Root relaxation: objective 3.350000e+01, 857 iterations, 0.07 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0   33.50000    0    6          -   33.50000      -     -    2s
+
+Gurobi 9.0.0 (mac64, gurobi_cl) logging started Thu Nov 28 22:37:20 2019
+
+Using license file /Users/David/gurobi.lic
+Set parameter TimeLimit to value 10
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.0 build v9.0.0rc2 (mac64)
+Copyright (c) 2019, Gurobi Optimization, LLC
+
+Warning: lp file contains 200 repeated variable(s) in constraints, grouped them, 200 cancellation
+Read LP format model from file ./gurobi_inputs/121_200.lp
+Reading time = 1.06 seconds
+: 47040 rows, 47599 columns, 1692806 nonzeros
+Optimize a model with 47040 rows, 47599 columns and 1692806 nonzeros
+Model fingerprint: 0x4085127d
+Variable types: 200 continuous, 47399 integer (47200 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 2e+02]
+  Objective range  [7e-01, 2e+01]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 2e+02]
+Found heuristic solution: objective 553.1300000
+Presolve added 199 rows and 0 columns
+Presolve time: 3.30s
+Presolved: 47239 rows, 47599 columns, 220406 nonzeros
+Variable types: 0 continuous, 47599 integer (47200 binary)
+
+Deterministic concurrent LP optimizer: primal and dual simplex
+Showing first log only...
+
+Concurrent spin time: 0.00s
+
+Solved with dual simplex
+
+Root relaxation: objective 2.479000e+01, 661 iterations, 0.39 seconds
+Total elapsed time = 5.09s
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0   24.79000    0   26  553.13000   24.79000  95.5%     -    5s
+
+Explored 1 nodes (9508 simplex iterations) in 10.83 seconds
+Thread count was 8 (of 8 available processors)
+
+Solution count 1: 553.13 
+
+Time limit reached
+Best objective 5.531300000000e+02, best bound 2.479000000000e+01, gap 95.5182%
