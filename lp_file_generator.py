@@ -1,49 +1,68 @@
 from utils import * 
 from student_utils import *
 from floyd_warshall import * 
+import sys
+from os import listdir
+from os.path import isfile, join
 
-
+"""
+Some global variables for file directories
+"""
+input_dir = "./inputs/"
+gurobi_sol_dir = "./sol_files/"
+gurobi_inp = "./gurobi_inputs"
 """
 This function generates the final lp file that reduces the problem to 
 linear programming. This file is used as an input to Gurobi.
 """
-def generate_lp_file(input_file):
+def generate_lp_file(input_file, write_file):
     lp_file_string = ""
+    # array to keep track of strings to join at the very end
+    # for optimizing string concatenations
+    join_strings = []
     input_data = read_file(input_file)
     number_of_locations, number_of_houses, list_of_locations, list_of_houses, starting_location, adjacency_matrix = data_parser(input_data)
     index_map = generate_index_map(list_of_locations, number_of_locations)
 
-    lp_file_string += "Minimize" + "\n"
     shortest_dist_matrix = all_pairs_shortest_paths(adjacency_matrix, number_of_locations)
     objective_string = generate_objective_function(list_of_locations, list_of_houses, adjacency_matrix, shortest_dist_matrix, index_map, number_of_locations)
-    lp_file_string += objective_string
+    join_strings.extend(["Minimize" + "\n", objective_string])
 
-    lp_file_string += "Subject To" + "\n"
+    #lp_file_string = ''.join([lp_file_string, "Subject To" + "\n"]) 
     clh_dropoff_string = generate_clh_dropoff_constraints(list_of_locations, list_of_houses, number_of_locations, index_map)
-    lp_file_string += clh_dropoff_string
+    #lp_file_string = ''.join([lp_file_string, clh_dropoff_string]) 
     indegree_outdegree_string = generate_indegree_outdegree_constraints(list_of_locations, number_of_locations)
-    lp_file_string += indegree_outdegree_string
+    #lp_file_string += indegree_outdegree_string
     no_subtour_string = generate_no_subtours_constraints(number_of_locations)
-    lp_file_string += no_subtour_string
+    #lp_file_string += no_subtour_string
     dropoff_string = generate_valid_dropoff_constraints(list_of_locations, list_of_houses, number_of_locations, index_map)
-    lp_file_string += dropoff_string
+    #lp_file_string += dropoff_string
     source_string = generate_source_constraint(starting_location, number_of_locations, index_map)
-    lp_file_string += source_string
+    #lp_file_string += source_string
+    join_strings.extend(["Subject To" + "\n", clh_dropoff_string, indegree_outdegree_string,
+                    no_subtour_string, dropoff_string, source_string
+                    ])
 
-    lp_file_string += "Bounds" + "\n"
+    #lp_file_string += "Bounds" + "\n"
     bounds_string = generate_bounds(number_of_locations, adjacency_matrix)
-    lp_file_string += bounds_string
+    #lp_file_string += bounds_string
+    join_strings.extend(["Bounds" + "\n", bounds_string])
 
-    lp_file_string += "Binary" + "\n"
+    #lp_file_string += "Binary" + "\n"
     binary_string = generate_binary(list_of_locations, list_of_houses, number_of_locations, adjacency_matrix)
-    lp_file_string += binary_string
+    #lp_file_string += binary_string
+    join_strings.extend(["Binary" + "\n", binary_string])
+    
 
-    lp_file_string += "Integers" + "\n"
+    #lp_file_string += "Integers" + "\n"
     integer_string = generate_integers(number_of_locations)
-    lp_file_string += integer_string
+    #lp_file_string += integer_string
+    join_strings.extend(["Integers" + "\n", integer_string])
 
-    lp_file_string += "End" 
-    write_to_file("./gurobi_inputs/test.lp", lp_file_string)
+    #lp_file_string += "End" 
+    join_strings.extend(["End"])
+    lp_file_string = ''.join(join_strings)
+    write_to_file(write_file, lp_file_string)
 """
 This function generates the list of edge variables xij for edges in the graph.
 This list contains only xij, xji for which there exist an edge between i and j
@@ -244,7 +263,24 @@ def generate_integers(number_of_locations):
     return u_variables
 
 
-generate_lp_file("./inputs/121_50.in")
+""" checks if a file in input_dir has .in extension """
+def fits_format(file):
+    return isfile(file) and file[-3:] == ".in"
+
+def write_lp_files(input_dir):
+    inp_files = [f for f in listdir(input_dir) if fits_format(join(input_dir, f))]
+    for i, inp_file in enumerate(inp_files):
+        # format the .lp name for the input file
+        lp_file = inp_file[:-3] + ".lp"
+        generate_lp_file(join(input_dir, inp_file), join(gurobi_inp, lp_file))
+        print('finished writing: {0}, the {1}th file'.format(lp_file, i))
+
+def main():
+    #write_lp_files(input_dir)
+    generate_lp_file("./inputs/121_50.in", './gurobi_inputs/121_50.lp')
+if __name__ == "__main__":
+    main()
+#generate_lp_file("./inputs/121_50.in")
 
 
 
