@@ -10,30 +10,32 @@ solve method.
 def generate_tour_and_dropoffs_from_sol(sol_file, start_index):
     print("start")
     data = read_file(sol_file)
-    print(data)
+    #print(data)
     edge_list = []
     dropoff_dict = {}
     for line in data: 
-        print(line)
-        if (line[0] == "x"):
-            split_line = re.split('[x_ ]', line)
-            vertex_i = split_line[0]
-            vertex_j = split_line[1]
-            edge_exists = split_line[2]
-            if (edge_exists):
+        #print(line)
+        if (line[0][0] == "x"):
+            split_line = re.split('[x_]', line[0])
+            #print(split_line)
+            vertex_i = int(split_line[1])
+            vertex_j = int(split_line[2])
+            edge_exists = int(line[1])
+            if (edge_exists == 1):
                 edge_list.append((vertex_i, vertex_j))
-            print((vertex_i, vertex_j))
-        elif (line[0] == "c"):
-            split_line = re.split('[c_ ]', line)
-            vertex_dropoff = split_line[0]
-            vertex_home = split_line[1]
-            dropped_off = split_line[2]
-            if vertex_dropoff in dropoff_dict:
-                dropoff_dict[vertex_dropoff].add(vertex_home)
-            else:
-                home_list = [vertex_home]
-                dropoff_dict[vertex_dropoff] = home_list
-
+            #print((vertex_i, vertex_j))
+        elif (line[0][0] == "c"):
+            split_line = re.split('[c_]', line[0])
+            vertex_dropoff = int(split_line[1])
+            vertex_home = int(split_line[2])
+            dropped_off = int(line[1])
+            if (dropped_off == 1):
+                if vertex_dropoff in dropoff_dict:
+                    dropoff_dict[vertex_dropoff].append(vertex_home)
+                else:
+                    home_list = [vertex_home]
+                    dropoff_dict[vertex_dropoff] = home_list
+    print(edge_list)
     vertex_tour = return_vertex_tour(edge_list, start_index)
 
     return vertex_tour, dropoff_dict
@@ -48,9 +50,10 @@ def return_vertex_tour(edge_list, start_index):
     curr = start_index
     while (edge_list != []):
         edges_starting_at_curr = [e for e in edge_list if e[0] == curr]
+        if (len(edges_starting_at_curr) == 0): 
+            break
         curr_edge = edges_starting_at_curr[0]
-        vertex_tour.append(int(curr_edge[0]))
-        print(int(curr_edge[0]))
+        vertex_tour.append(curr_edge[0])
         edge_list.remove(curr_edge)
         curr = curr_edge[1]
     vertex_tour.append(start_index)
@@ -68,5 +71,8 @@ start = 0
 for vertex in return_vertex_tour(edge_list, start):
     print(vertex)
 """
-
-generate_tour_and_dropoffs_from_sol("./sol_files/101_50.sol", 0)
+"""
+vertex_tour, drop_dict = generate_tour_and_dropoffs_from_sol("./sol_files/121_50.txt", 0)
+print(vertex_tour)
+print(drop_dict)
+"""

@@ -42,10 +42,11 @@ def solve(input_file, list_of_locations, starting_car_location): #list_of_locati
     subprocess.Popen(["bash", "./gurobi_solver_single.sh", lp_file_path])
     #use process_sol.py to generate list of locations and a dictionary mapping
     print("finished lp generation")
-    sol_file = input_file[:-3] + ".sol"
+    sol_file = input_file[:-3] + ".txt"
     sol_file_path = join(gurobi_sol_dir, sol_file)
     start_index = list_of_locations.index(starting_car_location)
     vertex_path, dropoff_dict = generate_tour_and_dropoffs_from_sol(sol_file_path, start_index)
+    print(vertex_path)
     return vertex_path, dropoff_dict
 
 """
@@ -83,7 +84,7 @@ def solve_from_file(input_file, output_directory, params=[]):
     input_data = utils.read_file(input_file_path)
     num_of_locations, num_houses, list_locations, list_houses, starting_car_location, adjacency_matrix = data_parser(input_data)
     car_path, drop_offs = solve(input_file, list_locations, starting_car_location)
-
+    #print(car_path)
     basename, filename = os.path.split(input_file)
     if not os.path.exists(output_directory):
         os.makedirs(output_directory)
