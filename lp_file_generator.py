@@ -112,12 +112,15 @@ def generate_objective_function(list_of_locations, list_of_houses, adjacency_mat
     #the edges first
     for i in range(0, len(edge_list)):
         e = edge_list[i]
+        row, col = e[1:].split("_")
+        edge_weight = adjacency_matrix[int(row)][int(col)]
+        weight = edge_weight * .6667
         if (i != len(edge_list) - 1): 
             #objective_function_string += "0.67 " + e + " + "
-            obj_func_joins.extend(["0.67 " + e + " + "])
+            obj_func_joins.extend([str(weight) + " " + e + " + "])
         else:
             #objective_function_string += "0.67 " + e + "\n"
-            obj_func_joins.extend(["0.67 " + e + "\n"])
+            obj_func_joins.extend([str(weight) + " " + e + "\n"])
 
     #the dropoff points next
     obj_func_joins.extend(["\t"])
@@ -138,10 +141,10 @@ This function generates the constraint string that the sum of all clh
 variables for each h is equal to 1, that is, the TA is only dropped off once.
 """
 def generate_clh_dropoff_constraints(list_of_locations, list_of_houses, number_of_locations, index_map):
-    clh_dropoff_constraints_string = ""
+    #clh_dropoff_constraints_string = ""
     clh_dropoff_joins = []
     for h in list_of_houses:
-        clh_dropoff_constraints_string += "\t"
+        #clh_dropoff_constraints_string += "\t"
         clh_dropoff_joins.append("\t")
         h_index = str(index_map[h])
         for i in range(0, number_of_locations):
@@ -154,7 +157,7 @@ def generate_clh_dropoff_constraints(list_of_locations, list_of_houses, number_o
         clh_dropoff_joins.append(" = 1" + "\n")
         #clh_dropoff_constraints_string += " = 1" + "\n"
     
-    return clh_dropoff_constraints_string.join(clh_dropoff_joins)
+    return ''.join(clh_dropoff_joins)
 
 """
 This function generates the constraint string for each location in the graph,
@@ -162,7 +165,7 @@ the indegree must equal the outdegree for any location to maintain the tour
 property.
 """
 def generate_indegree_outdegree_constraints(list_of_locations, number_of_locations):
-    indegree_outdegree_constraint_string = ""
+    #indegree_outdegree_constraint_string = ""
     indegree_outdegree_constraint_joins = []
     for i in range(0, number_of_locations):
         i_index = str(i)
@@ -186,7 +189,7 @@ This function generates constraints which ensure no subtours are selected,
 rather one single tour is selected. 
 """
 def generate_no_subtours_constraints(number_of_locations):
-    no_subtour_string = ""
+    #no_subtour_string = ""
     join_strings = []
     n = str(number_of_locations)
     n_1 = str(number_of_locations - 1)
@@ -197,7 +200,7 @@ def generate_no_subtours_constraints(number_of_locations):
                 join_strings.extend([next_str])
                 #no_subtour_string += "\t" + "u" + str(i) + " - " + "u" + str(j) + " + " + n + " " + "x" + str(i) + "_" + str(j) + " <= " + n_1 + "\n"
 
-    return no_subtour_string.join(join_strings)
+    return ''.join(join_strings)
 
 """
 This function generates valid dropoff constraints, essentially, the sum
@@ -208,7 +211,7 @@ our tour, and the corresponding clh must be 0 (we cannot dropoff at a vertex
 not included in our tour).
 """
 def generate_valid_dropoff_constraints(list_of_locations, list_of_houses, number_of_locations, index_map):
-    dropoff_constraint_string = ""
+    #dropoff_constraint_string = ""
     dropoff_constraint_joins = []
     for h in list_of_houses:
         h_index = str(index_map[h])
@@ -256,7 +259,7 @@ This function generates the bounds of the program (sets xij for edges from i
 to j not in our graph to 0).
 """
 def generate_bounds(number_of_locations, adjacency_matrix):
-    bounds_string = ""
+    #bounds_string = ""
     join_strings = []
     for i in range(0, number_of_locations):
         for j in range(0, number_of_locations):
@@ -265,7 +268,7 @@ def generate_bounds(number_of_locations, adjacency_matrix):
                 join_strings.extend([next_str])
                 #bounds_string += "\t" + "x" + str(i) + "_" + str(j) + " = 0" + "\n"
 
-    return bounds_string.join(join_strings)
+    return ''.join(join_strings)
 
 """
 This function specifies which lp variables are restricted to take on the 
@@ -274,9 +277,9 @@ values 0 or 1 - all the xij and all the clh.
 def generate_binary(list_of_locations, list_of_houses, number_of_locations, adjacency_matrix):
     edge_list = generate_edge_list(number_of_locations, adjacency_matrix)
     clh_list = generate_clh_list(list_of_locations, list_of_houses, number_of_locations)
-    xij_string = ""
+    #xij_string = ""
     xij_joins = []
-    clh_string = ""
+    #clh_string = ""
     clh_joins = []
     binary_string = "\t"
     for edge in edge_list:
