@@ -1685,6 +1685,11 @@ Best objective 1.206727000000e+02, best bound 1.107744273333e+02, gap 8.2026%
 Wrote result file './sol_files/121_50.sol'
 
 
+<<<<<<< HEAD
+Gurobi 9.0.0 (mac64, gurobi_cl) logging started Mon Dec  2 00:45:19 2019
+
+Using license file /Users/David/gurobi.lic
+=======
 Gurobi 9.0.0 (mac64, gurobi_cl) logging started Sun Dec  1 23:08:06 2019
 
 Using license file /Users/AustinSun/gurobi.lic
@@ -2942,6 +2947,7 @@ Gurobi 9.0.0 (mac64, gurobi_cl) logging started Mon Dec  2 01:39:21 2019
 
 Using license file /Users/AustinSun/gurobi.lic
 Set parameter TimeLimit to value 60
+>>>>>>> 883fed2342576fa8d4faea7d6e3a872e32915eac
 Set parameter LogFile to value gurobi.log
 Academic license - for non-commercial use only
 
@@ -2991,6 +2997,30 @@ H    0     0                     129.3398000  110.67220  14.4%     -    1s
      0     0  110.67220    0   31  129.33980  110.67220  14.4%     -    1s
 H    0     0                     127.3397000  110.67220  13.1%     -    1s
      0     2  110.67220    0   11  127.33970  110.67220  13.1%     -    1s
+<<<<<<< HEAD
+H   31    36                     122.6728000  110.67220  9.78%  12.7    2s
+H   32    36                     122.0061000  110.67220  9.29%  12.4    2s
+
+Cutting planes:
+  Learned: 7
+  Gomory: 1
+  MIR: 43
+  StrongCG: 4
+  Mod-K: 2
+  Relax-and-lift: 2
+
+Explored 35 nodes (1230 simplex iterations) in 2.44 seconds
+Thread count was 8 (of 8 available processors)
+
+Solution count 8: 122.006 122.673 127.34 ... 283.672
+
+Solve interrupted
+Best objective 1.220061000000e+02, best bound 1.106722000000e+02, gap 9.2896%
+
+Gurobi 9.0.0 (mac64, gurobi_cl) logging started Mon Dec  2 00:46:59 2019
+
+Using license file /Users/David/gurobi.lic
+=======
 H   31    36                     120.6727000  110.67220  8.29%  12.7    3s
   1349  1054  116.67250  127   33  120.67270  110.67220  8.29%   4.7    5s
 * 1849  1300              67     119.3393000  110.87221  7.09%   5.1    8s
@@ -3028,6 +3058,7 @@ Gurobi 9.0.0 (mac64, gurobi_cl) logging started Mon Dec  2 01:40:57 2019
 
 Using license file /Users/AustinSun/gurobi.lic
 Set parameter TimeLimit to value 60
+>>>>>>> 883fed2342576fa8d4faea7d6e3a872e32915eac
 Set parameter LogFile to value gurobi.log
 Academic license - for non-commercial use only
 
@@ -3036,7 +3067,11 @@ Copyright (c) 2019, Gurobi Optimization, LLC
 
 Warning: lp file contains 50 repeated variable(s) in constraints, grouped them, 50 cancellation
 Read LP format model from file ./gurobi_inputs/121_50.lp
+<<<<<<< HEAD
+Reading time = 0.02 seconds
+=======
 Reading time = 0.03 seconds
+>>>>>>> 883fed2342576fa8d4faea7d6e3a872e32915eac
 : 3168 rows, 3299 columns, 51006 nonzeros
 Optimize a model with 3168 rows, 3299 columns and 51006 nonzeros
 Model fingerprint: 0x5a6e489c
@@ -3047,7 +3082,11 @@ Coefficient statistics:
   Bounds range     [1e+00, 1e+00]
   RHS range        [1e+00, 5e+01]
 Presolve added 49 rows and 0 columns
+<<<<<<< HEAD
+Presolve time: 0.04s
+=======
 Presolve time: 0.05s
+>>>>>>> 883fed2342576fa8d4faea7d6e3a872e32915eac
 Presolved: 3217 rows, 3299 columns, 14306 nonzeros
 Variable types: 0 continuous, 3299 integer (3200 binary)
 
@@ -3064,6 +3103,25 @@ H    0     0                     173.3420000  110.67220  36.2%     -    0s
      0     0  110.67220    0   35  173.34200  110.67220  36.2%     -    0s
      0     0  110.67220    0   44  173.34200  110.67220  36.2%     -    0s
      0     0  110.67220    0   30  173.34200  110.67220  36.2%     -    0s
+<<<<<<< HEAD
+
+Cutting planes:
+  Learned: 5
+  Gomory: 1
+  MIR: 11
+  Zero half: 2
+  Relax-and-lift: 2
+
+Explored 1 nodes (335 simplex iterations) in 0.96 seconds
+Thread count was 8 (of 8 available processors)
+
+Solution count 3: 173.342 207.338 283.672 
+
+Solve interrupted
+Best objective 1.733420000000e+02, best bound 1.106722000000e+02, gap 36.1538%
+
+Wrote result file 'test.sol'
+=======
 H    0     0                     157.3412000  110.67220  29.7%     -    1s
      0     0  110.67220    0   38  157.34120  110.67220  29.7%     -    1s
      0     0  110.67220    0   20  157.34120  110.67220  29.7%     -    1s
@@ -3374,6 +3432,7 @@ Time limit reached
 Best objective 1.186726000000e+02, best bound 1.126722990000e+02, gap 5.0562%
 
 Wrote result file './sol_files/121_50.sol'
+>>>>>>> 883fed2342576fa8d4faea7d6e3a872e32915eac
 
 
 Gurobi 9.0.0 (mac64, gurobi_cl) logging started Mon Dec  2 02:01:53 2019
