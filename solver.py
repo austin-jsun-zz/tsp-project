@@ -31,7 +31,7 @@ def solve(input_file, list_of_locations, starting_car_location): #list_of_locati
     """
     #generate the relevant LP file 
     input_dir = "./inputs/"
-    gurobi_sol_dir = "./sol_files/"
+    gurobi_sol_dir = "./gurobi_solutions/"
     gurobi_inp = "./gurobi_inputs"
     lp_file = input_file[:-3] + ".lp"
     input_file_path = join(input_dir, input_file)
