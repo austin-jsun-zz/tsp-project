@@ -37,4 +37,15 @@ def return_vertex_tour(edge_list, start):
         vertex_tour.append(curr_edge[0])
         edge_list.remove(curr_edge)
         curr = curr_edge[1]
+    vertex_tour.append(start)
     return vertex_tour
+
+edge_list = [(0, 18), (10, 0), (11, 33), (14, 10), (15, 25), (16, 40), (18, 22),
+(19, 16), (21, 34), (22, 43), (23, 11), (24, 14), (25, 31), (27, 38), (30, 44),
+(31, 30), (33, 45), (34, 24), (36, 21), (38, 36), (40, 23), (43, 15), (44, 19),
+(45, 2), (2, 27)]
+
+start = 0
+
+for vertex in return_vertex_tour(edge_list, start):
+    print(vertex)
