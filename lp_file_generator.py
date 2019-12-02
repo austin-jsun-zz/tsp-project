@@ -248,7 +248,7 @@ def generate_source_constraint(starting_location, number_of_locations, index_map
         else:
             src_constraint_str_joins.append("x" + source_index + "_" + str(i))
             #source_constraint_string += "x" + source_index + "_" + str(i)
-    src_constraint_str_joins.append(" > 0" + "\n")
+    src_constraint_str_joins.append(" >= 1" + "\n")
     #source_constraint_string += " > 0" + "\n"
 
     #return source_constraint_string
