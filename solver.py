@@ -6,26 +6,47 @@ import argparse
 import utils
 
 from student_utils import *
+from lp_file_generator import *
+import subprocess
+from process_sol import *
 """
 ======================================================================
   Complete the following function.
 ======================================================================
 """
 
-def solve(list_of_locations, list_of_homes, starting_car_location, adjacency_matrix, params=[]):
+def solve(input_file, list_of_locations, starting_car_location): #list_of_locations, list_of_homes, starting_car_location, adjacency_matrix, params=[]):
     """
     Write your algorithm here.
-    Input:
+    Old Input:
         list_of_locations: A list of locations such that node i of the graph corresponds to name at index i of the list
         list_of_homes: A list of homes
         starting_car_location: The name of the starting location for the car
         adjacency_matrix: The adjacency matrix from the input file
+    New Input: just the input_file, because it's a lot easier to use lp_file_generator this way
     Output:
         A list of locations representing the car path
         A dictionary mapping drop-off location to a list of homes of TAs that got off at that particular location
         NOTE: both outputs should be in terms of indices not the names of the locations themselves
     """
-    pass
+    #generate the relevant LP file 
+    input_dir = "./inputs/"
+    gurobi_sol_dir = "./sol_files/"
+    gurobi_inp = "./gurobi_inputs"
+    lp_file = input_file[:-3] + ".lp"
+    input_file_path = join(input_dir, input_file)
+    lp_file_path = join(gurobi_inp, lp_file)
+    generate_lp_file(input_file_path, lp_file_path)
+    print('finished writing: {0}'.format(lp_file))
+    #use gurobi bash script to generate a .sol file 
+    subprocess.Popen(["bash", "./gurobi_solver_single.sh", lp_file_path])
+    #use process_sol.py to generate list of locations and a dictionary mapping
+    sol_file = input_file[:-3] + ".sol"
+    sol_file_path = join(gurobi_sol_dir, sol_file)
+    vertex_path, dropoff_dict = generate_tour_and_dropoffs_from_sol(sol_file_path, list_of_locations, starting_car_location)
+    
+    return vertex_path, dropoff_dict
+
 
 """
 ======================================================================
@@ -60,7 +81,7 @@ def solve_from_file(input_file, output_directory, params=[]):
 
     input_data = utils.read_file(input_file)
     num_of_locations, num_houses, list_locations, list_houses, starting_car_location, adjacency_matrix = data_parser(input_data)
-    car_path, drop_offs = solve(list_locations, list_houses, starting_car_location, adjacency_matrix, params=params)
+    car_path, drop_offs = solve(input_file, list_locations, starting_car_location)
 
     basename, filename = os.path.split(input_file)
     if not os.path.exists(output_directory):

@@ -1,7 +1,13 @@
 from utils import *
 import re 
 
-def generate_output_from_sol(sol_file, list_of_locations, start):
+"""
+This function reads an lp sol file and returns a vertex tour and 
+dropoff dictionary which maps each location to a list of TA's dropped 
+off at that location. This function should be used in solver.py in the 
+solve method. 
+"""
+def generate_tour_and_dropoffs_from_sol(sol_file, list_of_locations, start):
     data = read_file(sol_file)
     edge_list = []
     dropoff_dict = {}
@@ -28,6 +34,11 @@ def generate_output_from_sol(sol_file, list_of_locations, start):
 
     return vertex_tour, dropoff_dict
 
+"""
+This function is a helper function. Given a list of edges consisting of a tour 
+and a start vertex, it will return a list of vertices that represents the 
+order in which vertices are visited in this tour. 
+"""
 def return_vertex_tour(edge_list, start):
     vertex_tour = []
     curr = start
@@ -40,6 +51,8 @@ def return_vertex_tour(edge_list, start):
     vertex_tour.append(start)
     return vertex_tour
 
+"""
+TEST
 edge_list = [(0, 18), (10, 0), (11, 33), (14, 10), (15, 25), (16, 40), (18, 22),
 (19, 16), (21, 34), (22, 43), (23, 11), (24, 14), (25, 31), (27, 38), (30, 44),
 (31, 30), (33, 45), (34, 24), (36, 21), (38, 36), (40, 23), (43, 15), (44, 19),
@@ -49,3 +62,4 @@ start = 0
 
 for vertex in return_vertex_tour(edge_list, start):
     print(vertex)
+"""
