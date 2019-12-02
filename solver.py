@@ -39,13 +39,16 @@ def solve(input_file, list_of_locations, starting_car_location): #list_of_locati
     generate_lp_file(input_file_path, lp_file_path)
     print('finished writing: {0}'.format(lp_file))
     #use gurobi bash script to generate a .sol file 
-    subprocess.Popen(["bash", "./gurobi_solver_single.sh", lp_file_path])
+    subprocess.call(["bash", "./gurobi_solver_single.sh", lp_file_path])
     #use process_sol.py to generate list of locations and a dictionary mapping
     print("finished lp generation")
-    sol_file = input_file[:-3] + ".txt"
+    sol_file = input_file[:-3] + ".sol"
     sol_file_path = join(gurobi_sol_dir, sol_file)
+    pre, ext = os.path.splitext(sol_file_path)
+    txt_file_path = pre + ".txt"
+    os.rename(sol_file_path, txt_file_path)
     start_index = list_of_locations.index(starting_car_location)
-    vertex_path, dropoff_dict = generate_tour_and_dropoffs_from_sol(sol_file_path, start_index)
+    vertex_path, dropoff_dict = generate_tour_and_dropoffs_from_sol(txt_file_path, start_index)
     print(vertex_path)
     return vertex_path, dropoff_dict
 
@@ -97,7 +100,7 @@ def solve_all(input_directory, output_directory, params=[]):
     input_files = utils.get_files_with_extension(input_directory, 'in')
 
     for input_file in input_files:
-        solve_from_file(input_file, output_directory, params=params)
+        solve_from_file(input_file[7:], output_directory, params=params)
 
 
 if __name__=="__main__":
