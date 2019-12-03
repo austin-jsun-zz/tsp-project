@@ -20,16 +20,16 @@ def generate_tour_and_dropoffs_from_sol(sol_file, start_index):
             #print(split_line)
             vertex_i = int(split_line[1])
             vertex_j = int(split_line[2])
-            edge_exists = int(line[1])
-            if (edge_exists == 1):
+            edge_exists = round(float(line[1]))
+            if (edge_exists):
                 edge_list.append((vertex_i, vertex_j))
             #print((vertex_i, vertex_j))
         elif (line[0][0] == "c"):
             split_line = re.split('[c_]', line[0])
             vertex_dropoff = int(split_line[1])
             vertex_home = int(split_line[2])
-            dropped_off = int(line[1])
-            if (dropped_off == 1):
+            dropped_off = round(float(line[1]))
+            if (dropped_off):
                 if vertex_dropoff in dropoff_dict:
                     dropoff_dict[vertex_dropoff].append(vertex_home)
                 else:
