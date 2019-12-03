@@ -101,10 +101,10 @@ def solve_all(input_directory, output_directory, params=[]):
     output_files = set(utils.get_files_with_extension(output_directory, 'out'))
     print(output_files)
     for input_file in input_files:
-        out_file_path = "outputs/" + input_file[7:-3] + ".out"
-        if (out_file_path not in output_files):
-            solve_from_file(input_file[7:], output_directory, params=params)
-            output_files.add(out_file_path)
+        #out_file_path = "outputs/" + input_file[7:-3] + ".out"
+        #if (out_file_path not in output_files):
+        solve_from_file(input_file[7:], output_directory, params=params)
+            #output_files.add(out_file_path)
             #print(input_file[:-3] + ".out")
 
 

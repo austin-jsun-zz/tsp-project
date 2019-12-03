@@ -13,7 +13,7 @@ if __name__ == '__main__':
     with open('outputs.json', 'w') as output_json:
         data = {}
         for output in os.listdir(args.outputs):
-            with open(args.outputs + output, 'r') as output_file:
+            with open("./" + args.outputs + "/" + output, 'r') as output_file:
                 if output[-4:] == '.out':
                     string = ''
                     for l in output_file.readlines():
