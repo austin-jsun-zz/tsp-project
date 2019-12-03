@@ -1,3 +1,4 @@
 #./pycache/*
 gurobi_inputs/*
 zips/gurobi_inputs.zip
+gurobi_solutions/*
