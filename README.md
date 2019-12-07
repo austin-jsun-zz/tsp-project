@@ -10,6 +10,11 @@ A bit of information to run our solver:
 - The outputs folder is where all of the output solutions are written to. 
 - Download Gurobi (use an academic license or otherwise) 
 - Cd into the tsp-project directory after cloning. 
+- Delete all files in the outputs directory (this step must be performed, or the next command will not run Gurobi on any 
+files)
 - Run the following command: python3 solver.py --all inputs outputs 
 - If an output file for a given input does not yet exist in the outputs folder, the above command will produce a solution
-for the relevant input and put it in the outputs folder, and do this for all files in the inputs folder. 
+for the relevant input and put it in the outputs folder, and do this for all files in the inputs folder. If the output file
+in question already exists in the outputs folder, the script will skip running Gurobi on that file (hence the need to delete
+all files in the outputs directory before running the command to replicate our results). 
+- Time limit on Gurobi can be modified if you want to allocate more time to solve each input file: go into gurobi_solver_single.sh and modify the TIME_LIMIT parameter, in seconds. 
